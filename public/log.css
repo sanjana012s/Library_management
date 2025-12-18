@@ -1,0 +1,111 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Search bar */
+.search-bar {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 10px;
+  border-bottom: 2px solid #000;
+  z-index: 10;
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.search-bar button {
+  padding: 10px 16px;
+  border: none;
+  background: linear-gradient(90deg, #007bff, #00d4ff);
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-bar button:hover {
+  transform: scale(1.05);
+}
+
+/* Table */
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  position: sticky;
+  top: 0;
+  background: #333;
+  color: white;
+  z-index: 1;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+tr:nth-child(even) { background: #f9f9f9; }
+tr:hover { background: #d8ecff; }
+
+/* Status colors */
+.returned {
+  color: green;
+  font-weight: bold;
+}
+.issued {
+  color: red;
+  font-weight: bold;
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background: #007bff;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}

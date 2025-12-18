@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Return Book</title>
+  <link rel="stylesheet" href="/return.css">
+</head>
+<body>
+  <div class="form-card">
+    <h2>Return Book : <%= student ? student.name : "" %></h2>
+    <% if (student && student.issued_books && student.issued_books.length) { %>
+      <form action="/students/<%= student.student_id %>/return" method="POST">
+        <select name="book_id">
+          <% student.issued_books.forEach(b => { %>
+            <option value="<%= b.book_id %>"><%= b.book_id %> — <%= b.book_name %> ( <%= b.status %> )</option>
+          <% }) %>
+        </select>
+        <br>&hearts;
+        <br>&hearts;
+        <br>&hearts;
+        <br>&hearts;
+        <hr><hr><hr>
+        <div class="full"><button class="btn-primary" type="submit">Mark Returned</button></div>
+      </form>
+    <% } else { %>
+      <p>No books to return.</p>
+    <% } %>
+   
+  </div>
+   <center>
+  <a href="/students" class="back-btn">⬅ BACK  TO LIST</a>
+</center>
+</body>
+</html>

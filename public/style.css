@@ -1,0 +1,451 @@
+
+/* public/style.css - big stylish CSS (glassy + modern) */
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+:root{
+  --bg1: linear-gradient(135deg,#0f1724,#0b1220);
+  --glass: rgba(255,255,255,0.05);
+  --accent: #00e0ff;
+  --accent-2: #7b61ff;
+  --success: #4cd964;
+  --danger: #ff5c5c;
+  --text: #e8f0ff;
+  --muted: #b7c0d6;
+}
+
+/* reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: 'Inter',system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(123,97,255,0.12), transparent 8%),
+              radial-gradient(1000px 500px at 90% 90%, rgba(0,224,255,0.06), transparent 10%),
+              var(--bg1);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:24px;
+  min-height:100vh;
+}
+
+
+
+
+
+
+/* ========== GLOBAL STYLE ========== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, rgba(93, 12, 255, 0.3), rgba(155, 0, 250, 0.3), rgba(255, 0, 120, 0.3));
+  background-attachment: fixed;
+  color: #fff;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== FIXED HEADER ===== */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(25, 25, 25, 0.5);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.topbar .btn {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.topbar .btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
+  margin-top: 120px; /* Header ke neeche space */
+  width: 90%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.container:hover {
+  transform: scale(1.01);
+}
+
+/* ===== STUDENT DETAILS ===== */
+.student-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.student-details p {
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.student-details p:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .topbar {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+
+
+
+
+
+
+
+/* buttons */
+.btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.08);
+  color:var(--text);
+  padding:8px 12px;
+  border-radius:10px;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  cursor:pointer;font-weight:600;
+  transition:all .18s ease;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+.btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.06)}
+.btn-primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border:none;color:#021221;padding:9px 14px;border-radius:12px;box-shadow:0 8px 30px rgba(123,97,255,0.12);
+}
+.btn-primary:hover{filter:brightness(1.02);transform:translateY(-2px)}
+
+.danger{
+  color:var(--danger);border-color:transparent;background:transparent;padding:6px 8px;
+}
+
+/* search */
+.search-wrap{margin:18px 0;display:flex;justify-content:center}
+.search-form{display:flex;gap:10px;width:100%;max-width:1100px}
+.search-form input{
+  flex:1;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  color:var(--text);outline:none;font-weight:500;
+  transition:all .14s ease;
+}
+.search-form input:focus{box-shadow:0 10px 30px rgba(0,224,255,0.06);transform:translateY(-2px)}
+.search-form button{min-width:120px;}
+
+/* container & table */
+.container{max-width:1200px;margin:20px auto;padding:18px}
+.student-table{
+  width:100%;border-collapse:collapse;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;overflow:hidden;box-shadow:0 6px 40px rgba(3,8,18,0.6);
+}
+.student-table th, .student-table td{
+  padding:14px 16px;text-align:left;font-size:14px;border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.student-table thead th{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  color:var(--muted);text-transform:uppercase;font-size:12px;letter-spacing:0.8px
+}
+.student-table tbody tr:hover{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02))}
+
+/* form + cards */
+.form-card, .view-card{max-width:1100px;margin:24px auto;gap:24px;background-color:rgb(78, 67, 67);height:400px};
+
+.form-card .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;background:var(--glass);padding:20px;border-radius:14px;border:1px solid rgba(255,255,255,0.04)}
+.form-card input, .form-card textarea, .form-card select{
+  padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+  background:transparent;color:var(--text);outline:none;font-weight:500
+}
+.form-card textarea{min-height:120px;grid-column:span 2;padding:12px}
+.form-card .full{grid-column:span 2;display:flex;justify-content:center}
+.form-card{
+  height:500;
+  width:500;
+  
+}
+
+/* login card */
+.page-login{display:flex;align-items:center;justify-content:center;height:80vh}
+.login-card{width:380px;padding:30px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(0,0,0,0.6);text-align:center}
+.login-card input{width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.login-card .alert{background:rgba(255,80,80,0.08);color:var(--danger);padding:8px;border-radius:8px;margin-bottom:8px;font-weight:600}
+
+/* view student */
+
+
+
+
+
+
+
+
+/* Fees Section */
+.fees-section {
+  margin-top: 20px;
+  background: #f9fafc;
+  border-left: 5px solid #3498db;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.fees-section:hover {
+  background: #eef4ff;
+}
+
+.btn-markpaid {
+  background: #27ae60;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+}
+
+.btn-markpaid:hover {
+  background: #1e8449;
+  transform: scale(1.05);
+}
+
+/* Books Section */
+.books-section {
+  margin-top: 20px;
+}
+
+.books-section h4 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.books-section ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.books-section li {
+  background: #f1f4f9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 5px 0;
+  transition: background 0.3s ease;
+}
+
+.books-section li:hover {
+  background: #e4ebf7;
+}
+
+.book-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.btn-issuebook {
+  background: #0066ff;
+  border: none;
+  color: #fff;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-issuebook:hover {
+  background: #0048b4;
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+/* small helpers */
+.small{font-size:12px;color:var(--muted);margin-top:8px}
+.issue-form{display:flex;gap:8px;flex-wrap:wrap}
+.issue-form input{flex:1;min-width:140px}
+.actions-col .link{margin-right:10px;color:var(--accent);text-decoration:none}
+.link.danger{color:var(--danger)}
+
+/* responsiveness */
+@media (max-width:900px){
+  .form-card, .view-card, .student-table{padding:10px}
+  .form-card .grid{grid-template-columns:1fr}
+  .search-form{flex-direction:column;align-items:stretch}
+  .search-form button{width:100%}
+}
+
+
+
+
+.library-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  width: 350px;
+  color: #f1f1f1;
+  font-family: "Segoe UI", sans-serif;
+  transition: 0.3s;
+}
+
+.library-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.5);
+}
+
+.library-card h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #00bfff;
+}
+
+.btn-group, .fees-section, .books-section {
+  margin-top: 15px;
+}
+
+.btn-group button, .btn-markpaid, .btn-issuebook {
+  margin: 5px 5px 0 0;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-issue {
+  background-color: #00bfff;
+  color: #fff;
+}
+
+.btn-renew {
+  background-color: #ffaa00;
+  color: #fff;
+}
+
+.btn-cancel {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.btn-markpaid {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-issuebook {
+  background-color: #007bff;
+  color: white;
+}
+
+.book-input {
+  width: 80%;
+  padding: 6px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 10px;
+}
+
+
+.library-card {
+  background: #1c1f26;
+  color: #f1f1f1;
+  padding: 25px;
+  border-radius: 15px;
+  width: 360px;
+  margin: 40px auto;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  font-family: 'Poppins', sans-serif;
+}
+
+.library-card h3 {
+  color: #4cd964;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.library-card .btn-group,
+.fees-section,
+.books-section {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.library-card button {
+  margin: 5px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-issue { background: #4cd964; color: #000; }
+.btn-renew { background: #007aff; color: #fff; }
+.btn-cancel { background: #ff3b30; color: #fff; }
+.btn-markpaid { background: #ffcc00; color: #000; }
+.btn-issuebook { background: #00c7be; color: #000; }
+
+.book-input {
+  width: 80%;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+}

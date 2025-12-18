@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Students — Library</title>
+  <link rel="stylesheet" href="/listStudents.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Library — Students</h1>
+    <div class="actions">
+      <a class="btn" href="/students/add">➕ Add Student</a>
+      <a class="btn ghost" href="/">Logout</a>
+    </div>
+  </header>
+
+  <section class="search-wrap">
+    <form class="search-form" action="/students" method="get">
+      <input name="q" placeholder="Search (name,id,roll,course). Use field:value e.g. name:anu" value="<%= typeof q !== 'undefined' ? q : '' %>">
+      <button class="btn-primary" type="submit">Search</button>
+    </form>
+  </section>
+
+  <main class="container">
+    <table class="student-table">
+      <thead>
+        <tr><th>ID</th><th>Name</th><th>Roll</th><th>Course</th><th>Card</th><th>Fees</th><th>  &star; &star; &star; &star;&star; &star; &star; &star;   Actions  </th></tr>
+      </thead>
+      <tbody>
+        <% if (students && students.length) { %>
+          <% students.forEach(s => { %>
+            <tr>
+              <td><%= s.student_id %></td>
+              <td><%= s.name %></td>
+              <td><%= s.roll_no || "-" %></td>
+              <td><%= s.course || "-" %></td>
+              <td><%= s.library_card_issued ? (s.library_card_no || 'Yes') : 'No' %></td>
+              <td><%= s.library_fee_paid ? 'Paid' : 'Unpaid' %></td>
+           
+<td class="actions-col">
+  <a href="/students/view/<%= s.student_id %>" class="btn"><button>View</button></a>
+  <a href="/students/edit/<%= s.student_id %>" class="btn"><button>Edit</button></a>
+  <form action="/students/delete/<%= s.student_id %>" method="POST" style="display:inline;">
+    <button type="submit" class="btn danger">Delete</button>
+  </form>
+
+ 
+</td>
+
+
+
+
+
+
+
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr><td colspan="7" style="text-align:center;padding:40px">No students found.</td></tr>
+        <% } %>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

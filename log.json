@@ -1,0 +1,95 @@
+{
+  "logs": [
+    {
+      "id": 1,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card renewed",
+      "date": "6/11/2025, 2:55:11 pm"
+    },
+    {
+      "id": 2,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card cancelled",
+      "date": "6/11/2025, 2:55:16 pm"
+    },
+    {
+      "id": 3,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card renewed",
+      "date": "6/11/2025, 2:55:22 pm"
+    },
+    {
+      "id": 4,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card renewed",
+      "date": "6/11/2025, 2:55:23 pm"
+    },
+    {
+      "id": 5,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card issued",
+      "date": "6/11/2025, 2:55:25 pm"
+    },
+    {
+      "id": 6,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Issued book: js",
+      "date": "6/11/2025, 2:55:37 pm"
+    },
+    {
+      "id": 7,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Returned book: Python Programming",
+      "date": "6/11/2025, 2:55:52 pm"
+    },
+    {
+      "id": 8,
+      "student_id": "LIB492",
+      "student_name": "sana",
+      "action": "Added new student",
+      "date": "6/11/2025, 2:57:11 pm"
+    },
+    {
+      "id": 9,
+      "student_id": "LIB492",
+      "student_name": "Kiara Nair",
+      "action": "Returned book: Artificial Intelligence",
+      "date": "6/11/2025, 2:57:53 pm"
+    },
+    {
+      "id": 10,
+      "student_id": "LIB017",
+      "student_name": "Meera Yadav",
+      "action": "Deleted student",
+      "date": "25/11/2025, 1:50:35 am"
+    },
+    {
+      "id": 11,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Issued book: js",
+      "date": "3/12/2025, 11:45:27 am"
+    },
+    {
+      "id": 12,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card renewed",
+      "date": "3/12/2025, 11:46:15 am"
+    },
+    {
+      "id": 13,
+      "student_id": "LIB014",
+      "student_name": "Diya Patel",
+      "action": "Library card renewed",
+      "date": "3/12/2025, 11:46:17 am"
+    }
+  ]
+}

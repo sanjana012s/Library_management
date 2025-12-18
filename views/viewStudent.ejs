@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Student — View</title>
+  <link rel="stylesheet" href="/viewStudent.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Student :<%= student ? student.name : "Not found" %></h1>
+    <div class="actions">
+      <a class="btn" href="/students">Back</a>
+      <% if (student) { %>
+        <a class="btn" href="/students/edit/<%= student.student_id %>">Edit</a>
+      <% } %>
+    </div>
+  </header>
+
+  <main class="view-card">
+    <% if (student) { %>
+      <div class="left">
+        <div class="avatar-large"><%= student.name.charAt(0).toUpperCase() %></div>
+      </div>
+
+      <div class="right">
+        <p><strong>ID:</strong> <%= student.student_id %></p>
+        <p><strong>Name:</strong> <%= student.name %></p>
+        <p><strong>Roll:</strong> <%= student.roll_no || "-" %></p>
+        <p><strong>Course:</strong> <%= student.course || "-" %></p>
+        
+        <hr>
+
+        <h3>Library Card</h3>
+        <p><strong>Issued:</strong> <%= student.library_card_issued ? "Yes" : "No" %></p>
+        <p><strong>Card No:</strong> <%= student.library_card_no || "-" %></p>
+        <p><strong>Issue:</strong> <%= student.card_issue_date || "-" %></p>
+        <p><strong>Expiry:</strong> <%= student.card_expiry_date || "-" %></p>
+
+        <form action="/students/<%= student.student_id %>/card" method="POST" style="margin-top:10px;">
+          <button name="action" value="issue" class="btn">Issue Card</button>
+          <button name="action" value="renew" class="btn">Renew</button>
+          <button name="action" value="cancel" class="btn danger">Cancel</button>
+        </form>
+<hr>
+        <h3>Fees</h3>
+        <p><strong>Paid:</strong> <%= student.library_fee_paid ? "Yes" : "No" %></p>
+        
+<hr>
+        <h3>Issued Books:</h3>
+        <% if (student.issued_books && student.issued_books.length) { %>
+          <ul>
+            <% student.issued_books.forEach(b => { %>
+              <li><strong>book issued:<%= b.book_name %></strong> &hearts;(Issued date: <%= b.issue_date %>)</li>
+              <li><strong>book author:<%= b.author %></strong> 
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>No books issued.</p>
+        <% } %>
+        
+
+        <h4>Issue a new book</h4>
+        <hr><hr><hr>
+        <form action="/students/<%= student.student_id %>/issue" method="POST" class="issue-form">
+          <input name="book_id" placeholder="Book ID">
+          <input name="book_name" placeholder="Book name" required>
+          <input name="author" placeholder="Author">
+          <input name="return_date" placeholder="Return date (YYYY-MM-DD)">
+
+          <br><br>
+          <center>
+          <button class="btn-primary" type="submit">Issue Book</button>
+          </center>
+          <br>
+        </form>
+        <center>
+        <form action="/students/<%= student.student_id %>/return" method="GET" style="margin-top:8px;">
+          <button class="btn">Return Book</button>
+        </form>
+        </center>
+      </div>
+    <% } else { %>
+      <p>Student not found.</p>
+    <% } %>
+  </main>
+  
+</body>
+</html>

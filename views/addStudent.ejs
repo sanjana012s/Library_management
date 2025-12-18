@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Add Student</title>
+  <link rel="stylesheet" href="/addStudent.css">
+</head>
+<body>
+  <div class="form-card">
+    <h2>Add New Student</h2>
+    <form action="/students/add" method="POST" class="grid">
+      <input name="name" placeholder="Name" required>
+      <input name="roll_no" placeholder="Roll No">
+      <input name="course" placeholder="Course">
+      <input name="year" placeholder="Year">
+      <input name="section" placeholder="Section">
+      <input name="email" placeholder="Email">
+      <input name="phone" placeholder="Phone">
+      <input name="address" placeholder="Address">
+      <label><input type="checkbox" name="library_card_issued"> Issue Library Card</label>
+      <input name="library_card_no" placeholder="Card No (optional)">
+      <div class="full"><button class="btn-primary" type="submit">Save</button></div>
+    </form>
+    <hr><hr>
+    <center>
+  <a href="/students" class="back-btn">⬅ BACK  TO LIST</a>
+</center>
+  </div>
+</body>
+</html>

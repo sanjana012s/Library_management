@@ -1,0 +1,147 @@
+/* Form card styling */
+body{
+ background: linear-gradient(90deg, #19191a, #cd0caa);
+
+}
+.form-card {
+  max-width: 720px;
+  margin: 90px auto;
+  padding: 28px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  background: rgb(0 0 0 / 84%);
+}
+
+/* Grid layout for input fields */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Input box style */
+.grid input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+/* Primary button style */
+.btn-primary {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #ffd700, #ff7a00);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Form card styling */
+.form-card {
+  max-width: 720px;
+  margin: 90px auto;
+  padding: 28px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+/* Grid layout for input fields */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Input box style */
+.grid input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid white;      /* white border */
+  background: rgba(255, 255, 255, 0.1);
+  color: black;                 /* black text */
+  outline: none;
+}
+
+/* Placeholder text color (red) */
+.grid input::placeholder {
+  color: red;
+  opacity: 1; /* to make sure it’s fully visible */
+}
+
+/* Checkbox ko bada karne ka style */
+input[type="checkbox"] {
+  width: 20px;         /* optional — base width */
+  height: 20px;        /* optional — base height */
+  transform: scale(1.5);   /* 1.5x bada — aur bada chahiye to 2 ya 2.5 kar lo */
+  cursor: pointer;         /* hand cursor */
+  accent-color: #ff7a00;   /* color change (modern browsers) */
+  margin-right: 8px;
+}
+
+
+label {
+  font-size: 18px;            /* text thoda bada */
+  color: white;               /* text color */
+}
+
+.full {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #ffd700, #ff7a00);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none; /* link ke underline hata do */
+  margin: 5px;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #ff7a00, #ffd700);
+}
+
+.back-btn {
+  background: linear-gradient(90deg, #00c6ff, #0072ff); /* blue tone */
+  color: white;
+}
+
+.back-btn:hover {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff); /* Blue gradient */
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.back-btn:hover {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+

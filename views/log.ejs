@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transaction Log</title>
+  <link rel="stylesheet" href="/log.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>
+  📘 Activity Log
+  <% if (filter) { %>
+    — for <%= filter %>
+  <% } %>
+</h1>
+
+
+    <div class="search-bar">
+      <form method="get" action="/log">
+        <input type="text" name="q" placeholder="🔍 Search by student name or book..." value=""<%= q || '' %>"
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Book</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (logs && logs.length > 0) { %>
+            <% logs.forEach(l => { %>
+              <tr>
+                <td><%= l.transaction_id %></td>
+                <td><%= l.student_id %></td>
+                <td><%= l.student_name %></td>
+                <td><%= l.book_name %></td>
+                <td><%= l.date %></td>
+                <td class="<%= l.status === 'Returned' ? 'returned' : 'issued' %>">
+                  <%= l.status %>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6">No transaction records found.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/students" class="back-btn">⬅ Back to Students</a>
+  </div>
+
+  <script src="/public/js/log.js"></script>
+</body>
+</html>

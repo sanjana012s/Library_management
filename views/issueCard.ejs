@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Issue Library Card</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="form-box">
+    <h2> Issue Library Card to <%= student.name %></h2>
+    <form method="POST" action="/students/issue/<%= student.student_id %>">
+      <input type="text" name="library_card_no" placeholder="Library Card No" required>
+      <input type="text" name="membership_type" placeholder="Membership Type (e.g., Annual)" required>
+      <input type="number" name="fine_due" placeholder="Fine Due (if any)" value="0">
+      <button type="submit">Issue Card</button>
+    </form>
+    <center>
+  <a href="/students" class="back-btn">⬅ BACK</a>
+</center>
+  </div>
+</body>
+</html>
