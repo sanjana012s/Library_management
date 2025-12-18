@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Owner Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background:#f2f4f8;
+      padding:20px;
+    }
+
+    h2 {
+      text-align:center;
+      margin-bottom:15px;
+      color:#222;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.15);
+      background:white;
+    }
+
+    th, td {
+      padding:12px;
+      text-align:center;
+      border-bottom:1px solid #ddd;
+      vertical-align:top;
+    }
+
+    th {
+      background: linear-gradient(135deg,#ff512f,#dd2476);
+      color:white;
+      font-size:14px;
+      text-transform:uppercase;
+    }
+
+    tr:hover {
+      transform: scale(1.01);
+      transition:0.2s;
+    }
+
+    ul {
+      padding-left:18px;
+      margin:0;
+      text-align:left;
+    }
+
+    li {
+      margin-bottom:6px;
+      padding:6px 8px;
+      border-radius:6px;
+      background:#f1f5f9;
+      font-size:13px;
+    }
+
+    select, button {
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      cursor:pointer;
+    }
+
+    button {
+      background: linear-gradient(135deg,#00c6ff,#0072ff);
+      color:white;
+      font-weight:500;
+      margin-left:6px;
+      border:none;
+      transition:0.3s;
+    }
+
+    button:hover {
+      transform:scale(1.05);
+      box-shadow:0 6px 15px rgba(0,114,255,0.4);
+    }
+
+    td:last-child {
+      font-weight:bold;
+      color:#16a34a;
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media(max-width:768px) {
+      table, thead, tbody, tr, td {
+        display:block;
+        width:100%;
+      }
+
+      thead {
+        display:none;
+      }
+
+      tr {
+        margin-bottom:15px;
+        border-radius:14px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.15);
+        padding:12px;
+      }
+
+      td {
+        display:flex;
+        justify-content:space-between;
+        padding:6px 0;
+        border:none;
+      }
+
+      td::before {
+        font-weight:bold;
+        color:#374151;
+      }
+
+      td:nth-child(1)::before { content:"Order ID"; }
+      td:nth-child(2)::before { content:"Customer"; }
+      td:nth-child(3)::before { content:"Table"; }
+      td:nth-child(4)::before { content:"Items"; }
+      td:nth-child(5)::before { content:"Status"; }
+      td:nth-child(6)::before { content:"Total"; }
+
+      select, button {
+        width:100%;
+        margin-top:6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>👨‍🍳 Owner Dashboard</h2>
+
+<table id="ordersTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Customer</th>
+      <th>Table</th>
+      <th>Items</th>
+      <th>Status</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if(orders && orders.length>0){ %>
+      <% orders.forEach(o => { %>
+        <tr id="order-<%= o.id %>">
+          <td>#<%= o.id %></td>
+          <td><%= o.customerName %></td>
+          <td><%= o.tableNo %></td>
+          <td>
+            <ul>
+              <% o.items.forEach(i => { %>
+                <li>🍽 <%= i.name %>  ₹<%= i.price %></li>
+              <% }) %>
+            </ul>
+          </td>
+          <td>
+            <form action="/update-status/<%= o.id %>" method="POST">
+              <select name="status">
+                <option <%= o.status==="Pending"?"selected":"" %>>Pending</option>
+                <option <%= o.status==="Preparing"?"selected":"" %>>Preparing</option>
+                <option <%= o.status==="Served"?"selected":"" %>>Served</option>
+              </select>
+              <button type="submit">Update</button>
+            </form>
+          </td>
+          <td>₹<%= o.total %></td>
+        </tr>
+      <% }) %>
+    <% } else { %>
+      <tr>
+        <td colspan="6">No orders yet</td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+
+// Random pastel color generator
+function randomColor() {
+  const r = Math.floor(Math.random()*128 + 127);
+  const g = Math.floor(Math.random()*128 + 127);
+  const b = Math.floor(Math.random()*128 + 127);
+  return `rgb(${r},${g},${b})`;
+}
+
+// Color existing rows
+document.querySelectorAll("#ordersTable tbody tr").forEach(row=>{
+  row.style.background = randomColor();
+});
+
+// 🔴 LIVE NEW ORDER
+socket.on("newOrder", order=>{
+  const table = document.getElementById("ordersTable").querySelector("tbody");
+
+  let itemsHTML = "<ul>";
+  order.items.forEach(i=>{
+    itemsHTML += `<li>🍽 ${i.name} – ₹${i.price}</li>`;
+  });
+  itemsHTML += "</ul>";
+
+  const row = document.createElement("tr");
+  row.id = "order-" + order.id;
+  row.style.background = randomColor();
+
+  row.innerHTML=`
+    <td>#${order.id}</td>
+    <td>${order.customerName}</td>
+    <td>${order.tableNo}</td>
+    <td>${itemsHTML}</td>
+    <td>
+      <form action="/update-status/${order.id}" method="POST">
+        <select name="status">
+          <option ${order.status==="Pending"?"selected":""}>Pending</option>
+          <option ${order.status==="Preparing"?"selected":""}>Preparing</option>
+          <option ${order.status==="Served"?"selected":""}>Served</option>
+        </select>
+        <button type="submit">Update</button>
+      </form>
+    </td>
+    <td>₹${order.total}</td>
+  `;
+  table.appendChild(row);
+});
+</script>
+
+</body>
+</html>

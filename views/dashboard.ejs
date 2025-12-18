@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>QR Food Order</title>
+  <style>
+    /* ---------- BASE ---------- */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      height: 100vh;
+    }
+
+    /* PANELS */
+    .left, .right {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .left {
+      flex: 1;
+      position: sticky;
+      top: 0;
+      height: fit-content;
+    }
+
+    .right {
+      flex: 2;
+      overflow-y: auto;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    /* ---------- ITEM CARD ---------- */
+    .item-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background: #fafafa;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .item-card:hover {
+      background: #eef6ff;
+    }
+
+    .item-card.selected {
+      border-color: #2563eb;
+      background: #e0ecff;
+      box-shadow: 0 0 10px rgba(37,99,235,0.4);
+    }
+
+    /* TICK */
+    .tick {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+      opacity: 0;
+      transition: 0.2s;
+      position: absolute;
+      right: 90px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .item-card.selected .tick {
+      opacity: 1;
+    }
+
+    .item-name {
+      font-weight: 500;
+      flex: 1;
+      margin-left: 10px;
+    }
+
+    .price {
+      font-weight: bold;
+    }
+
+    /* ---------- FORM ---------- */
+    .order-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(135deg,#22c55e,#16a34a);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .total-box {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    /* ---------- MOBILE RESPONSIVE ---------- */
+    @media(max-width: 968px){
+      .container {
+        flex-direction: column;
+        padding: 10px;
+        height: 100vh;
+      }
+
+      .left, .right {
+        width: 100%;
+        padding: 15px;
+        border-radius: 14px;
+      }
+
+      .right {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* MENU TITLE FIXED */
+      .right h2 {
+        position: sticky;
+        top: 0;
+        background: white;
+        padding: 10px 0;
+        z-index: 5;
+      }
+
+      /* ONLY ITEMS SCROLLABLE */
+      .right-items {
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 6px;
+      }
+
+      .right-items::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      .right-items::-webkit-scrollbar-thumb {
+        background: #cbd5f5;
+        border-radius: 10px;
+      }
+    }
+    /* ---------- UNIVERSAL RESPONSIVE RESET ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- DESKTOP DEFAULT ---------- */
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 100vh;
+}
+
+/* ---------- MOBILE / TABLET (ALL PHONES) ---------- */
+@media (max-width: 1024px) {
+
+  body {
+    overflow: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    height: 100vh;
+    padding: 8px;
+  }
+
+  /* CUSTOMER DETAILS – AUTO FIT */
+  .left {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  /* MENU AREA */
+  .right {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+    border-radius: 14px;
+  }
+
+  /* MENU TITLE – FIXED */
+  .right h2 {
+    padding: 12px;
+    margin: 0;
+    font-size: 18px;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 15;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* ONLY ITEMS SCROLL */
+  .right-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+
+  /* ITEM CARD MOBILE FRIENDLY */
+  .item-card {
+    padding: 14px;
+    font-size: 15px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+  }
+
+  .item-name {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+
+  /* BUTTON FULL WIDTH */
+  .order-btn {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+}
+
+/* ---------- SMALL MOBILES (VERY SMALL SCREEN) ---------- */
+@media (max-width: 480px) {
+
+  .item-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .price {
+    align-self: flex-end;
+    font-size: 14px;
+  }
+
+  .right h2 {
+    font-size: 16px;
+  }
+
+  .left h2 {
+    font-size: 16px;
+  }
+}
+/* ================= FONT SIZE CONTROL ================= */
+
+/* DEFAULT (DESKTOP) */
+html {
+  font-size: 16px;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.4rem;
+}
+
+.left h2,
+.right h2 {
+  font-size: 1.35rem;
+}
+
+/* Text */
+body,
+.item-name,
+.price,
+input,
+button {
+  font-size: 1rem;
+}
+
+/* Total & Button */
+.total-box {
+  font-size: 1.15rem;
+}
+
+.order-btn {
+  font-size: 1.1rem;
+}
+
+/* ================= TABLET ================= */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .total-box {
+    font-size: 1.1rem;
+  }
+
+  .order-btn {
+    font-size: 1.05rem;
+  }
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+
+  .item-name,
+  .price {
+    font-size: 0.95rem;
+  }
+
+  .order-btn {
+    font-size: 1rem;
+  }
+}
+/* ========== ANDROID FONT SIZE CONTROL ========== */
+
+/* Target Android only */
+@media screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+
+  /* Base font */
+  html {
+    font-size: 15px;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+
+  /* Headings */
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  .left h2,
+  .right h2 {
+    font-size: 1.3rem;
+  }
+
+  /* Menu items */
+  .item-name {
+    font-size: 1rem;
+  }
+
+  .price {
+    font-size: 0.95rem;
+  }
+
+  /* Inputs */
+  input[type="text"] {
+    font-size: 1rem;
+  }
+
+  /* Total */
+  .total-box {
+    font-size: 1.15rem;
+  }
+
+  /* Button */
+  .order-btn {
+    font-size: 1.1rem;
+  }
+}
+
+/* ========== SMALL ANDROID PHONES ========== */
+@media screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 1) {
+
+  html {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .item-name {
+    font-size: 0.95rem;
+  }
+
+  .price {
+    font-size: 0.9rem;
+  }
+
+  .order-btn {
+    font-size: 1.05rem;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+<form action="/payment-success" method="POST" onsubmit="return submitCheck()">
+
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="left">
+    <h2>👤 Customer Details</h2>
+
+    <label>Customer Name</label>
+    <input type="text" name="customerName" required>
+
+    <label>Table No</label>
+    <input type="text" name="tableNo" required>
+
+    <!-- Hidden selected items -->
+    <div id="hiddenItems"></div>
+
+    <h3 class="total-box">
+      Total: ₹ <span id="totalPrice">0</span>
+    </h3>
+
+    <!-- Hidden total -->
+    <input type="hidden" name="total" id="totalInput" value="0">
+
+    <button type="submit" class="order-btn">🛒 Place Order</button>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <h2>🍽 Menu</h2>
+    <div class="right-items">
+  <% if (menu && menu.length > 0) { %>
+    <% menu.forEach(item => { %>
+      <div class="item-card" 
+           data-id="<%= item.id %>" 
+           data-price="<%= item.price %>" 
+           onclick="toggleItem(this)" 
+           style="background: <%= randomColor() %>">  <!-- Random color here -->
+        <div class="tick">✔</div>
+        <span class="item-name"><%= item.name %></span>
+        <span class="price">₹<%= item.price %></span>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No items available.</p>
+  <% } %>
+</div>
+
+  </div>
+
+</div>
+</form>
+
+<script>
+let total = 0;
+let selectedItems = [];
+
+function toggleItem(card) {
+  const id = card.dataset.id;
+  const price = Number(card.dataset.price);
+
+  if (!card.classList.contains("selected")) {
+    card.classList.add("selected");
+    selectedItems.push(id);
+    total += price;
+  } else {
+    card.classList.remove("selected");
+    selectedItems = selectedItems.filter(item => item !== id);
+    total -= price;
+  }
+
+  document.getElementById("totalPrice").innerText = total;
+  document.getElementById("totalInput").value = total;
+
+  updateHidden();
+}
+
+function updateHidden() {
+  const div = document.getElementById("hiddenItems");
+  div.innerHTML = "";
+  selectedItems.forEach(id => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "items";
+    input.value = id;
+    div.appendChild(input);
+  });
+}
+
+function submitCheck() {
+  if (selectedItems.length === 0) {
+    alert("❌ Please select at least one item");
+    return false;
+  }
+  return true;
+}
+
+
+
+</script>
+
+</body>
+</html>
